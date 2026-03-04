@@ -275,16 +275,26 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a…           | I want to…                                          | So that I can…                           |
+| -------- |-----------------|-----------------------------------------------------|------------------------------------------|
+| `* * *`  | user            | add addresses                                       | store new delivery locations             |
+| `* * *`  | user            | remove addresses                                    | keep the address book clean              |
+| `* * *`  | user            | edit addresses                                      | correct outdated location details        |
+| `* * *`  | user            | create a delivery list                              | keep track of deliveries                 |
+| `* * *`  | user            | view delivery lists and addresses                   | know what to do next                     |
+| `* * *`  | user            | mark a delivery as complete                         | track what is left                       |
+| `* * *`  | user            | mark a delivery as incomplete                       | undo mistakes                            |
+| `* * *`  | user            | add a client contact with key fields                | retrieve client details quickly          |
+| `* * *`  | user            | create a delivery record linked to a client contact | track work by customer                   |
+| `* * *`  | forgetful user  | track all deliveries for the day                    | complete them on time                    |
+| `* *`    | Efficient user      | Plan the route beforehand                                | reach all locations quickly and easily   |
+| `* *`    | user            | view deliveries due at each location                | track progress per stop                  |
+| `* *`    | user            | tag contacts (e.g., VIP/fragile/COD/restricted)     | filter for special handling              |
+| `* *`    | user            | add cut-off timings to deliveries                   | know which deliveries must be done first |
+| `* *`    | user            | sort deliveries by tags/time/distance               | prioritize efficiently                   |
+| `*`      | first-time user | view a guided tour                                  | learn the app quickly                    |
+| `*`      | Lazy user       | add addresses using postal code/coordinates         | reduce manual typing                     |
+| `*`      | Driving user    | View map through the app                            | use the GPS to navigate quickly          |
 
 ## Use cases
 
