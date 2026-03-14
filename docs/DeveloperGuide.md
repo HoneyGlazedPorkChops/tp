@@ -298,7 +298,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Use cases
 
-
 ### UC01 Create a delivery record linked to a client contact
 
 
@@ -328,7 +327,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 ### UC02 Mark a delivery as complete
-
 
 **Actor:** User (dispatcher / delivery coordinator) 
 **Preconditions:** 
