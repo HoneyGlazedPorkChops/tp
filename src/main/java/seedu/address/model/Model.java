@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.company.Company;
+import seedu.address.model.delivery.Delivery;
 
 /**
  * The API of the Model component.
@@ -85,4 +86,17 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredCompanyList(Predicate<Company> predicate);
+
+    // for deliveryCommands
+    boolean hasDelivery(Delivery delivery);
+
+    void deleteDelivery(Delivery target);
+
+    void addDelivery(Delivery delivery);
+
+    ObservableList<Delivery> getFilteredDeliveryList();
+
+    void updateFilteredDeliveryList(Predicate<Delivery> predicate);
+
+    void setDelivery(Delivery target, Delivery editedDelivery);
 }
