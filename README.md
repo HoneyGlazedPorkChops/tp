@@ -7,8 +7,8 @@
   * Planning delivery routes from different locations
   * Keeping track of high priority tasks
 
-**The project aims to facilitate and help keep track of delivery progress, ensuring the entire process is as smooth as possible**
+* **The project aims to facilitate and help keep track of delivery progress, ensuring the entire process is as smooth as possible**
 
->It is named `MyCelia`, after Mycelium, which is a root-like network of fungi, keeping businesses linked together**
+>It is named `MyCelia`, after Mycelium which is a root-like network of fungi, keeping businesses linked together
 
 * This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
