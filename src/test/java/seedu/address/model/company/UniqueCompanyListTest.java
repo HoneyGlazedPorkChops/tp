@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.company;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalCompanies.ALICE;
+import static seedu.address.testutil.TypicalCompanies.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,13 +15,11 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.company.Company;
-import seedu.address.model.company.UniqueCompanyList;
 import seedu.address.model.company.exceptions.CompanyNotFoundException;
 import seedu.address.model.company.exceptions.DuplicateCompanyException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.CompanyBuilder;
 
-public class UniquePersonListTest {
+public class UniqueCompanyListTest {
 
     private final UniqueCompanyList uniqueCompanyList = new UniqueCompanyList();
 
@@ -44,7 +42,7 @@ public class UniquePersonListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueCompanyList.add(ALICE);
-        Company editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Company editedAlice = new CompanyBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueCompanyList.contains(editedAlice));
     }
@@ -87,7 +85,7 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueCompanyList.add(ALICE);
-        Company editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Company editedAlice = new CompanyBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniqueCompanyList.setCompany(ALICE, editedAlice);
         UniqueCompanyList expectedUniqueCompanyList = new UniqueCompanyList();

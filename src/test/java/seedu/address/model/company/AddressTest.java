@@ -1,9 +1,9 @@
-package seedu.address.model.person;
+package seedu.address.model.company;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import seedu.address.model.company.Address;
+
 import org.junit.jupiter.api.Test;
 
 public class AddressTest {
