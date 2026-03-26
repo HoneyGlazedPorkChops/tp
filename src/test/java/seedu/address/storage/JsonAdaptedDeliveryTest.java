@@ -63,7 +63,7 @@ public class JsonAdaptedDeliveryTest {
         JsonAdaptedDelivery delivery =
                 new JsonAdaptedDelivery(VALID_PRODUCT, VALID_COMPANY_STRING, "2026/03/25 14:30",
                         VALID_ADDRESS, VALID_TAGS);
-        assertThrows(IllegalValueException.class, Deadline.MESSAGE_CONSTRAINTS,
-                () -> delivery.toModelType(EXISTING_COMPANIES));
+        assertThrows(IllegalValueException.class,
+                Deadline.MESSAGE_CONSTRAINTS, () -> delivery.toModelType(EXISTING_COMPANIES));
     }
 }

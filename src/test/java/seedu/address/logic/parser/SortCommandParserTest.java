@@ -19,12 +19,11 @@ import seedu.address.model.company.Name;
 import seedu.address.model.company.Phone;
 
 public class SortCommandParserTest {
-
-    private final SortCommandParser parser = new SortCommandParser();
     private static final Company DELL = new Company(new Name("Dell"), new Phone("99272758"),
             new Email("dell@example.com"),
             new seedu.address.model.company.Address("Changi Business Park Central 1"),
             getTagSet("test"));
+    private final SortCommandParser parser = new SortCommandParser();
 
     @Test
     public void parse_validArgs_returnsSortCommand() {
