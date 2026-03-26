@@ -10,7 +10,11 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.deliverycommands.SortCommand;
 import seedu.address.logic.parser.deliveryparser.SortCommandParser;
-import seedu.address.model.company.*;
+import seedu.address.model.company.Company;
+import seedu.address.model.company.CompanyNameContainsKeywordsPredicate;
+import seedu.address.model.company.Email;
+import seedu.address.model.company.Name;
+import seedu.address.model.company.Phone;
 
 import java.util.List;
 

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javafx.collections.ObservableList;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.company.Company;
 import seedu.address.model.delivery.Address;
