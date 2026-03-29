@@ -155,9 +155,157 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Switch book feature
+### Implementation
 
-#### Proposed Implementation
+MyCelia supports two operating modes: the Company Book and the Delivery Book.
+This feature is facilitated by a mode flag stored in the Model component through Model#getCompanyPackage() and Model#setCompanyPackage(boolean). The flag determines which parser and book-specific command set should be active at a given time.
+
+At the user level, the command used is switch. In the Company Book, companycommands.SwitchCommand sets the mode flag to false, which switches the application to the Delivery Book. The User Guide also states that this same command toggles between the two books, and that the UI tabs provide an equivalent interaction.
+
+This design allows MyCelia to reuse a single command box and window while exposing two different workflows. Instead of launching separate applications or windows, the system keeps both books in memory and changes only the active context. This keeps interaction fast and matches the product’s keyboard-first design.
+
+Example
+
+Step 1. The user is currently viewing the Company Book.
+
+Step 2. The user enters switch.
+
+Step 3. SwitchCommand#execute(Model) is called.
+
+Step 4. The command updates the model mode flag by calling model.setCompanyPackage(false).
+
+Step 5. The UI updates to show the Delivery Book instead.
+
+Design considerations
+
+Aspect: How to support two workflows in one app
+
+Alternative 1 (current choice): Store both books in the same model and toggle the active mode with a boolean flag.
+Pros: Simple control flow, easy to integrate with one shared UI shell, and low overhead when switching.
+Cons: Parsers and UI logic need to consistently respect the current mode.
+Alternative 2: Split the app into two separate windows or two separate applications.
+Pros: Stronger separation between workflows.
+Cons: Poorer user experience and more duplicated logic for shared functionality such as help, exit, and storage handling.
+### Delivery creation feature
+### Implementation
+
+The delivery creation feature is implemented by deliverycommands.AddCommand. The command requires a product, company, deadline, and address, with optional tags. According to the User Guide, the user enters the command in the form add pr/PRODUCT c/COMPANY dl/DEADLINE a/ADDRESS [t/TAG]....
+
+Internally, AddCommand does not store only a raw company name. Instead, it stores a CompanyNameContainsKeywordsPredicate and uses it during execution to search the existing Company Book for a matching company. If no matching company is found, command execution fails with a "Company not found" error. This ensures that deliveries remain linked to valid company records already present in the system.
+
+An additional convenience built into the command is that the delivery address can default to the selected company’s address. In AddCommand#execute, when the provided address is null, the command creates the delivery using the company’s stored address instead. This reduces duplicated typing when a delivery is meant for the company’s usual address.
+
+After the company is resolved and the final address is determined, the command constructs a Delivery object and checks model.hasDelivery(toAdd) before insertion. If the delivery is not a duplicate, it is inserted through model.addDelivery(toAdd). The model then refreshes the filtered delivery list so the new item becomes visible in the UI.
+
+Example
+
+Step 1. The user enters
+add pr/Industrial Printer c/Acme Supplies dl/2026-03-25 14:30 a/10 Anson Road t/urgent.
+
+Step 2. The delivery-side parser creates an AddCommand.
+
+Step 3. AddCommand#execute(Model) searches the Company Book for Acme Supplies.
+
+Step 4. If the company exists, the command creates a Delivery object.
+
+Step 5. The model checks for duplicates and adds the delivery to the Delivery Book.
+
+Step 6. The UI refreshes and shows the newly added delivery.
+
+Design considerations
+
+Aspect: How a delivery should reference a company
+
+Alternative 1 (current choice): Resolve the company during command execution by searching the Company Book.
+Pros: Keeps delivery creation consistent with existing company records and avoids orphan deliveries.
+Cons: Command execution depends on the company already existing and on matching by name.
+Alternative 2: Allow free-form company names in deliveries without validation.
+Pros: Faster to implement and more permissive.
+Cons: Inconsistent data, duplicate company names, and weaker linkage between the two books.
+### Delivery status feature (mark / unmark)
+### Implementation
+
+MyCelia represents delivery completion using a tag-based approach rather than a separate boolean field. Specifically, MarkCommand adds the tag "delivered" to the selected delivery, while UnmarkCommand removes that tag. The User Guide is aligned with this implementation and explicitly states that delivered entries will display a delivered tag in the Delivery Book view.
+
+Both commands operate on the filtered delivery list, not directly on the full underlying storage list. Each command first retrieves model.getFilteredDeliveryList(), validates that the provided index is within range, then reconstructs a new Delivery object using the old delivery’s product, company, deadline, and address, but with an updated tag set. The replacement is applied using model.setDelivery(oldDelivery, newDelivery).
+
+This immutable-replacement style avoids mutating an existing Delivery object in place. It keeps command behavior more predictable and fits the same edit pattern used elsewhere in AB3-style projects, where updated domain objects are typically recreated and then replaced in the model.
+
+Example
+
+Step 1. The user enters mark 1.
+
+Step 2. MarkCommand retrieves the first delivery from model.getFilteredDeliveryList().
+
+Step 3. The command copies its existing tags into a new set.
+
+Step 4. The command adds the tag delivered.
+
+Step 5. A new Delivery object is created and replaces the old one through model.setDelivery(...).
+
+Step 6. The UI refreshes and the delivery is shown with the delivered tag.
+
+The unmark command follows the same flow, except that it removes the delivered tag instead of adding it.
+
+Design considerations
+
+Aspect: How to represent delivery completion
+
+Alternative 1 (current choice): Use the existing tag system and reserve the tag delivered to indicate completion.
+Pros: Reuses existing infrastructure and keeps the data model simple.
+Cons: Completion is encoded implicitly through a special tag rather than a dedicated status field.
+Alternative 2: Add a dedicated boolean or enum status field to Delivery.
+Pros: Clearer semantics and easier extension to multiple statuses such as pending/in transit/delivered.
+Cons: Requires more model, parser, and storage changes.
+### Delivery sorting feature
+### Implementation
+
+The sort feature is implemented by deliverycommands.SortCommand. In the user-facing command format, the user specifies a company using sort c/COMPANY. The command is described in the User Guide as sorting that company’s deliveries by deadline, with the earliest deadline shown first.
+
+During execution, SortCommand extracts the company name and builds a predicate that matches deliveries whose company name equals that input case-insensitively. It first checks whether the Delivery Book contains at least one matching delivery. If no matching delivery exists, the command fails with an error message. Otherwise, it calls model.sortDeliveriesByDeadline(matchesCompany) and then narrows the filtered list to the same predicate using model.updateFilteredDeliveryList(matchesCompany).
+
+The actual ordering logic is centralized in ModelManager using DELIVERY_DEADLINE_COMPARATOR. This comparator sorts first by deadline, then by company name, and finally by product name. Centralizing the comparator in the model keeps command logic concise and ensures that delivery ordering rules remain consistent.
+
+Example
+
+Step 1. The user enters sort c/Acme Supplies.
+
+Step 2. SortCommand constructs a predicate matching deliveries linked to Acme Supplies.
+
+Step 3. The command checks whether any matching deliveries exist.
+
+Step 4. The model sorts matching deliveries using the deadline comparator.
+
+Step 5. The filtered delivery list is updated to show only deliveries for Acme Supplies, now ordered by earliest deadline first.
+
+Design considerations
+
+Aspect: Where sorting logic should live
+
+Alternative 1 (current choice): Keep sorting orchestration in the command, but store the comparator in the model.
+Pros: Separates “when to sort” from “how to sort”, improving maintainability.
+Cons: Sorting behavior is split across two classes.
+Alternative 2: Perform all sorting directly inside SortCommand.
+Pros: Fewer moving parts.
+Cons: Weaker separation of concerns and harder reuse if more commands later need the same ordering rule.
+### Delivery parser routing
+### Implementation
+
+MyCelia uses book-specific parsers so that commands can be interpreted according to the currently active workflow. On the delivery side, DeliveryBookParser maps the command word to delivery-specific commands such as AddCommand, EditCommand, DeleteCommand, FindCommand, MarkCommand, UnmarkCommand, SortCommand, and delivery-side SwitchCommand. It also handles shared commands such as help and exit.
+
+This design is a natural fit for a dual-book application. Even though both books share several command words such as add, edit, delete, find, and clear, the meaning of those commands differs depending on whether the user is managing companies or deliveries. Parser separation avoids overloading one parser with too many mode-dependent branches.
+
+Design considerations
+
+Aspect: How to parse commands in a dual-book app
+
+Alternative 1 (current choice): Use separate parsers for different books.
+Pros: Cleaner command routing and easier extension of each workflow independently.
+Cons: Some duplicated command-word handling structure across parsers.
+Alternative 2: Use one global parser containing all command variants.
+Pros: Single parsing entry point.
+Cons: Harder to maintain because many command words are reused across books.
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
