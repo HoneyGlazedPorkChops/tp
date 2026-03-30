@@ -190,39 +190,41 @@ Cons: Poorer user experience and more duplicated logic for shared functionality 
 ### Delivery creation feature
 ### Implementation
 
-The delivery creation feature is implemented by deliverycommands.AddCommand. The command requires a product, company, deadline, and address, with optional tags. According to the User Guide, the user enters the command in the form add pr/PRODUCT c/COMPANY dl/DEADLINE a/ADDRESS [t/TAG]....
+The delivery creation feature is implemented by `deliverycommands.AddCommand`. The command requires a product, company, and deadline, with optional tags. According to the User Guide, the user enters the command in the form `add pr/PRODUCT c/COMPANY dl/DEADLINE [t/TAG]...`.
 
-Internally, AddCommand does not store only a raw company name. Instead, it stores a CompanyNameContainsKeywordsPredicate and uses it during execution to search the existing Company Book for a matching company. If no matching company is found, command execution fails with a "Company not found" error. This ensures that deliveries remain linked to valid company records already present in the system.
+Internally, `AddCommand` does not store only a raw company name. Instead, it stores a `CompanyNameContainsKeywordsPredicate` and uses it during execution to search the existing Company Book for a matching company. If no matching company is found, command execution fails with a "Company not found" error. This ensures that deliveries remain linked to valid company records already present in the system.
 
-An additional convenience built into the command is that the delivery address can default to the selected company’s address. In AddCommand#execute, when the provided address is null, the command creates the delivery using the company’s stored address instead. This reduces duplicated typing when a delivery is meant for the company’s usual address.
+The delivery address is no longer provided by the user. Instead, the command always uses the selected company’s stored address when constructing the delivery. This design reduces duplicated input and ensures consistency between company records and delivery addresses.
 
-After the company is resolved and the final address is determined, the command constructs a Delivery object and checks model.hasDelivery(toAdd) before insertion. If the delivery is not a duplicate, it is inserted through model.addDelivery(toAdd). The model then refreshes the filtered delivery list so the new item becomes visible in the UI.
+After the company is resolved, the command constructs a `Delivery` object and checks `model.hasDelivery(toAdd)` before insertion. If the delivery is not a duplicate, it is inserted through `model.addDelivery(toAdd)`. The model then refreshes the filtered delivery list so the new item becomes visible in the UI.
 
-Example
+### Example
 
-Step 1. The user enters
-add pr/Industrial Printer c/Acme Supplies dl/2026-03-25 14:30 a/10 Anson Road t/urgent.
+Step 1. The user enters  
+`add pr/Industrial Printer c/Acme Supplies dl/2026-03-25 14:30 t/urgent`.
 
-Step 2. The delivery-side parser creates an AddCommand.
+Step 2. The delivery-side parser creates an `AddCommand`.
 
-Step 3. AddCommand#execute(Model) searches the Company Book for Acme Supplies.
+Step 3. `AddCommand#execute(Model)` searches the Company Book for `Acme Supplies`.
 
-Step 4. If the company exists, the command creates a Delivery object.
+Step 4. If the company exists, the command retrieves the company’s stored address and uses it to construct the `Delivery` object.
 
 Step 5. The model checks for duplicates and adds the delivery to the Delivery Book.
 
 Step 6. The UI refreshes and shows the newly added delivery.
 
-Design considerations
+### Design considerations
 
-Aspect: How a delivery should reference a company
+**Aspect: How a delivery should reference a company**
 
-Alternative 1 (current choice): Resolve the company during command execution by searching the Company Book.
-Pros: Keeps delivery creation consistent with existing company records and avoids orphan deliveries.
-Cons: Command execution depends on the company already existing and on matching by name.
-Alternative 2: Allow free-form company names in deliveries without validation.
-Pros: Faster to implement and more permissive.
-Cons: Inconsistent data, duplicate company names, and weaker linkage between the two books.
+**Alternative 1 (current choice):** Resolve the company during command execution and use the company’s stored address.
+* Pros: Keeps delivery creation consistent with existing company records, avoids orphan deliveries, and eliminates duplicated address input.
+* Cons: Command execution depends on the company already existing and on matching by name.
+
+**Alternative 2:** Allow free-form company names and manually specified addresses in deliveries.
+* Pros: More flexible and allows quick entry without pre-existing company records.
+* Cons: Inconsistent data, duplicate company names, and potential mismatch between company and delivery addresses.
+
 ### Delivery status feature (mark / unmark)
 ### Implementation
 
@@ -306,71 +308,6 @@ Cons: Some duplicated command-word handling structure across parsers.
 Alternative 2: Use one global parser containing all command variants.
 Pros: Single parsing entry point.
 Cons: Harder to maintain because many command words are reused across books.
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
 
 #### Design considerations:
 
