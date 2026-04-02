@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
@@ -52,6 +53,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML private StackPane routePanelPlaceholder;
     @FXML private StackPane resultDisplayPlaceholder;
     @FXML private StackPane statusbarPlaceholder;
+    @FXML private Label userAddressLabel;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -108,6 +110,8 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        userAddressLabel.textProperty().bind(model.getUserAddress());
 
         syncSelectedTabWithMode();
         updateMapButtonState();

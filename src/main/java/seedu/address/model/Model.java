@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
+import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.company.Company;
@@ -53,7 +54,14 @@ public interface Model {
     User getUser();
 
     /**
+     * Returns StringProperty of the user's depot address.
+     */
+    StringProperty getUserAddress();
+
+    /**
      * Replaces the current user with {@code user}.
      */
     void setUser(User user);
+
+
 }

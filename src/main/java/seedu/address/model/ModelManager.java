@@ -8,6 +8,8 @@ import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -35,6 +37,7 @@ public class ModelManager implements Model {
     private final FilteredList<Company> filteredCompanies;
     private final FilteredList<Delivery> filteredDeliveries;
     private boolean isCompanyPackage;
+    private final StringProperty userAddress = new SimpleStringProperty();
 
     /**
      * Initializes a ModelManager with the given addressBook, deliveryBook, userPrefs and user.
@@ -52,6 +55,7 @@ public class ModelManager implements Model {
         this.user = user;
         this.filteredCompanies = new FilteredList<>(this.addressBook.getCompanyList());
         this.filteredDeliveries = new FilteredList<>(this.deliveryBook.getDeliveryList());
+        userAddress.set("Start address: " + user.getDepotAddress());
     }
 
     /**
@@ -229,8 +233,14 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public StringProperty getUserAddress() {
+        return userAddress;
+    }
+
+    @Override
     public void setUser(User user) {
         requireNonNull(user);
+        userAddress.set("Start address: " + user.getDepotAddress());
         this.user = user;
     }
 
