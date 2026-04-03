@@ -28,7 +28,7 @@ public class SortCommandParserTest {
     @Test
     public void parse_validArgs_returnsSortCommand() {
         assertParseSuccess(parser, " c/Dell",
-                new SortCommand(new CompanyNameContainsKeywordsPredicate(List.of("Dell"))));
+                new SortCommand(List.of(new CompanyNameContainsKeywordsPredicate(List.of("Dell")))));
     }
 
     @Test
