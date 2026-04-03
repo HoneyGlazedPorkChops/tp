@@ -42,7 +42,6 @@ public class SortCommandParser implements Parser<SortCommand> {
                 })
                 .toList();
 
-        System.out.println(companies);
         if (companies.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }

@@ -36,7 +36,6 @@ public class SortCommand extends Command {
      * Creates a SortCommand to sort deliveries for the specified company.
      */
     public SortCommand(List<CompanyNameContainsKeywordsPredicate> name) {
-        System.out.println(name);
         requireNonNull(name);
         this.name = name;
     }
@@ -48,7 +47,6 @@ public class SortCommand extends Command {
         Predicate<Delivery> matchesCompany = delivery -> false;
         List<String> empty = new ArrayList<>();
         for (String name : companyName) {
-            System.out.println(name);
             Predicate<Delivery> match = delivery -> delivery.getCompany().getName().toString().equalsIgnoreCase(name);
             boolean hasMatchingDelivery = model.getDeliveryBook().getDeliveryList().stream()
                     .anyMatch(match);
@@ -61,12 +59,12 @@ public class SortCommand extends Command {
         model.updateFilteredDeliveryList(matchesCompany);
         if (!empty.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_NO_DELIVERIES_FOR_COMPANY,
-                    String.join("", companyName)));
+                    String.join(" ", companyName)));
         }
 
         return new CommandResult(
                 String.format(MESSAGE_SORT_SUCCESS, model.getFilteredDeliveryList().size(),
-                        String.join("", companyName)));
+                        String.join(" ", companyName)));
     }
 
     @Override
