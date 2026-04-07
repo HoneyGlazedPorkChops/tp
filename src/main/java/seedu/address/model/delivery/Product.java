@@ -1,5 +1,7 @@
 package seedu.address.model.delivery;
 
+import seedu.address.model.company.Name;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -31,6 +33,9 @@ public class Product {
         productName = product;
     }
 
+    public String getName() {
+        return productName;
+    }
     /**
      * Returns true if a given string is a valid product.
      */

@@ -63,7 +63,7 @@ public class FilterCommandTest {
     public void execute_missingCompanyDelivery_throwsCommandException() {
         Model model = new ModelManager(new seedu.address.model.AddressBook(), new DeliveryBook(), new UserPrefs());
         FilterCommand command = new FilterCommand(List.of(new CompanyNameContainsKeywordsPredicate(List.of("Dell"))));
-        String expectedMessage = String.format(FilterCommand.MESSAGE_NO_DELIVERIES_FOR_COMPANY, "Dell");
+        String expectedMessage = String.format(FilterCommand.MESSAGE_NO_DELIVERIES, "Dell");
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(model));
     }
