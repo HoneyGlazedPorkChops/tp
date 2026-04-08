@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -41,48 +40,48 @@ public class CommandBox extends UiPart<Region> {
 
     static {
         // Shared commands
-        COMPANY_COMMANDS.put("add",    "n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...");
-        COMPANY_COMMANDS.put("edit",   "INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...");
+        COMPANY_COMMANDS.put("add", "n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...");
+        COMPANY_COMMANDS.put("edit", "INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...");
         COMPANY_COMMANDS.put("delete", "INDEX");
-        COMPANY_COMMANDS.put("find",   "KEYWORD [MORE_KEYWORDS]...");
-        COMPANY_COMMANDS.put("list",   "");
-        COMPANY_COMMANDS.put("clear",  "");
+        COMPANY_COMMANDS.put("find", "KEYWORD [MORE_KEYWORDS]...");
+        COMPANY_COMMANDS.put("list", "");
+        COMPANY_COMMANDS.put("clear", "");
         COMPANY_COMMANDS.put("switch", "");
-        COMPANY_COMMANDS.put("set",    "a/ADDRESS");
-        COMPANY_COMMANDS.put("help",   "");
-        COMPANY_COMMANDS.put("exit",   "");
+        COMPANY_COMMANDS.put("set", "a/ADDRESS");
+        COMPANY_COMMANDS.put("help", "");
+        COMPANY_COMMANDS.put("exit", "");
 
-        DELIVERY_COMMANDS.put("add",    "pr/PRODUCT c/COMPANY dl/DEADLINE a/ADDRESS [t/TAG]...");
-        DELIVERY_COMMANDS.put("edit",   "INDEX [pr/PRODUCT] [c/COMPANY] [dl/DEADLINE] [a/ADDRESS] [t/TAG]...");
+        DELIVERY_COMMANDS.put("add", "pr/PRODUCT c/COMPANY dl/DEADLINE a/ADDRESS [t/TAG]...");
+        DELIVERY_COMMANDS.put("edit", "INDEX [pr/PRODUCT] [c/COMPANY] [dl/DEADLINE] [a/ADDRESS] [t/TAG]...");
         DELIVERY_COMMANDS.put("delete", "INDEX");
-        DELIVERY_COMMANDS.put("mark",   "INDEX");
+        DELIVERY_COMMANDS.put("mark", "INDEX");
         DELIVERY_COMMANDS.put("unmark", "INDEX");
         DELIVERY_COMMANDS.put("select", "INDEX [INDEX]... | none");
-        DELIVERY_COMMANDS.put("sort",   "c/COMPANY");
-        DELIVERY_COMMANDS.put("route",  "");
-        DELIVERY_COMMANDS.put("find",   "KEYWORD [MORE_KEYWORDS]...");
-        DELIVERY_COMMANDS.put("list",   "");
-        DELIVERY_COMMANDS.put("clear",  "");
+        DELIVERY_COMMANDS.put("sort", "c/COMPANY");
+        DELIVERY_COMMANDS.put("route", "");
+        DELIVERY_COMMANDS.put("find", "KEYWORD [MORE_KEYWORDS]...");
+        DELIVERY_COMMANDS.put("list", "");
+        DELIVERY_COMMANDS.put("clear", "");
         DELIVERY_COMMANDS.put("switch", "");
-        DELIVERY_COMMANDS.put("set",    "a/ADDRESS");
-        DELIVERY_COMMANDS.put("help",   "");
-        DELIVERY_COMMANDS.put("exit",   "");
+        DELIVERY_COMMANDS.put("set", "a/ADDRESS");
+        DELIVERY_COMMANDS.put("help", "");
+        DELIVERY_COMMANDS.put("exit", "");
 
-        DESCRIPTIONS.put("add",    "Add a new entry");
-        DESCRIPTIONS.put("edit",   "Edit an existing entry");
+        DESCRIPTIONS.put("add", "Add a new entry");
+        DESCRIPTIONS.put("edit", "Edit an existing entry");
         DESCRIPTIONS.put("delete", "Remove an entry by index");
-        DESCRIPTIONS.put("find",   "Search entries by keyword");
-        DESCRIPTIONS.put("list",   "Show all entries");
-        DESCRIPTIONS.put("clear",  "Delete all entries");
+        DESCRIPTIONS.put("find", "Search entries by keyword");
+        DESCRIPTIONS.put("list", "Show all entries");
+        DESCRIPTIONS.put("clear", "Delete all entries");
         DESCRIPTIONS.put("switch", "Switch between company / delivery view");
-        DESCRIPTIONS.put("set",    "Set your delivery origin address");
-        DESCRIPTIONS.put("help",   "Open the help window");
-        DESCRIPTIONS.put("exit",   "Save and exit");
-        DESCRIPTIONS.put("mark",   "Mark delivery as completed");
+        DESCRIPTIONS.put("set", "Set your delivery origin address");
+        DESCRIPTIONS.put("help", "Open the help window");
+        DESCRIPTIONS.put("exit", "Save and exit");
+        DESCRIPTIONS.put("mark", "Mark delivery as completed");
         DESCRIPTIONS.put("unmark", "Remove completed status");
         DESCRIPTIONS.put("select", "Select deliveries for route planning");
-        DESCRIPTIONS.put("sort",   "Sort deliveries by company deadline");
-        DESCRIPTIONS.put("route",  "Plan route for selected deliveries");
+        DESCRIPTIONS.put("sort", "Sort deliveries by company deadline");
+        DESCRIPTIONS.put("route", "Plan route for selected deliveries");
     }
 
     private final CommandExecutor commandExecutor;

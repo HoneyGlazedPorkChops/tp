@@ -200,6 +200,9 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Creates help window.
+     */
     @FXML
     public void handleHelp() {
         if (!helpWindow.isShowing()) {
