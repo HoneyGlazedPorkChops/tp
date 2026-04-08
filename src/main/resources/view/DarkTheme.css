@@ -7,18 +7,18 @@
    Page background      #EFF6FF   cold-white canvas
    Surface              #FFFFFF   card / panel surface
    Surface alt          #DBEAFE   secondary surface
-   Surface teal-tint    #DBEAFE   selected / active tint
+   Surface blue-tint    #DBEAFE   selected / active tint
 
    Border               #BFDBFE   default dividers
    Border strong        #93C5FD   prominent dividers
 
-   Text primary         #1E3A8A   navy-slate
-   Text secondary       #4E6E9B   muted slate
+   Text primary         #1E3A8A   navy blue
+   Text secondary       #4E6E9B   muted blue
    Text faint           #93B4D4   placeholders, hints
 
-   Primary teal         #2563EB
-   Primary teal hover   #1D4ED8
-   Primary teal soft    #DBEAFE
+   Primary blue         #2563EB
+   Primary blue hover   #1D4ED8
+   Primary blue soft    #DBEAFE
 
    Deadline amber bg    #FFF7E8
    Deadline amber text  #92400E

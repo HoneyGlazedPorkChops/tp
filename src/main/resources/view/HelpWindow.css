@@ -1,25 +1,25 @@
 /* Inherits design tokens from the main theme */
 
 #helpMessageContainer {
-    -fx-background-color: #F4F7F9;
+    -fx-background-color: #EFF6FF;
     -fx-padding: 16 20 16 20;
     -fx-spacing: 12;
     -fx-alignment: CENTER_LEFT;
 }
 
 #helpMessage {
-    -fx-text-fill: #102A43;
+    -fx-text-fill: #1E3A8A;
     -fx-font-family: "Segoe UI", "SF Pro Text", "Inter", sans-serif;
     -fx-font-size: 11pt;
 }
 
 #copyButton {
     -fx-background-color: #FFFFFF;
-    -fx-border-color: #D8E1E8;
+    -fx-border-color: #BFDBFE;
     -fx-border-width: 1;
     -fx-border-radius: 6;
     -fx-background-radius: 6;
-    -fx-text-fill: #102A43;
+    -fx-text-fill: #1E3A8A;
     -fx-font-family: "Segoe UI Semibold", "SF Pro Text", "Inter", sans-serif;
     -fx-font-size: 10pt;
     -fx-padding: 5 14 5 14;
@@ -27,10 +27,10 @@
 }
 
 #copyButton:hover {
-    -fx-background-color: #EEF3F6;
-    -fx-border-color: #B8C5D0;
+    -fx-background-color: #DBEAFE;
+    -fx-border-color: #93C5FD;
 }
 
 #copyButton:armed {
-    -fx-background-color: #DDE5EC;
+    -fx-background-color: #BFDBFE;
 }
