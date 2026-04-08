@@ -72,16 +72,21 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of several parts, including the `CommandBox`, `ResultDisplay`, `StatusBarFooter`, and the panels used to display book-specific data.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+Unlike the original AB3 design, MyCelia supports two distinct operating contexts: the **Company Book** and the **Delivery Book**. The UI updates according to the current active book, displaying either company records or delivery records. This allows both workflows to coexist within a single application window.
 
-The `UI` component,
+The UI component uses the JavaFX UI framework. The layout of these UI parts is defined in corresponding `.fxml` files in the `src/main/resources/view` folder. For example, the layout of the `MainWindow` is specified in `MainWindow.fxml`.
+
+The `UI` component:
 
 * executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* listens for changes to `Model` data so that the displayed company list or delivery list can be updated automatically.
+* keeps a reference to the `Logic` component, because the UI depends on it to parse and execute commands.
+* depends on classes in the `Model` component, as it displays `Company` and `Delivery` objects stored in the application state.
+* reflects the current mode of the application, allowing users to switch between the Company Book and Delivery Book through commands or tab-based interactions.
+
+This design supports MyCelia’s keyboard-first interaction model while keeping the interface intuitive for users managing both company and delivery information.
 
 ### Logic component
 
@@ -98,13 +103,33 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
+The Logic component is responsible for parsing and executing user commands.
+
+In MyCelia, command parsing depends on the **currently active book**. Since the application supports both the **Company Book** and the **Delivery Book**, the Logic component routes user input to different parsers depending on the current mode stored in the `Model`.
+
+More specifically:
+
+1. When the user enters a command, the `LogicManager` receives the full command text.
+2. The `LogicManager` checks the current application mode from the `Model`.
+3. If the application is in Company Book mode, the input is passed to the company-side parser.
+4. If the application is in Delivery Book mode, the input is passed to the delivery-side parser.
+5. The selected parser creates the corresponding `Command` object.
+6. The command is executed by the `LogicManager`.
+7. The result of command execution is returned as a `CommandResult` object.
+
+This separation is necessary because several command words, such as `add`, `edit`, `delete`, `find`, and `clear`, are shared by both books but operate on different types of data. For example, `add` in the Company Book creates a `Company`, while `add` in the Delivery Book creates a `Delivery`.
+
+The Logic component therefore uses book-specific parsers to avoid overloading a single parser with too many context-dependent branches. This improves maintainability and makes it easier to extend each workflow independently.
+
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+* `LogicManager` acts as the main coordinator for command execution.
+* Parsing is delegated to a parser appropriate for the current mode.
+* The parser returns a concrete subclass of `Command`.
+* The command interacts with the `Model` during execution.
+* After execution, the `CommandResult` is returned back to the UI.
+
+This design allows MyCelia to support two related but distinct workflows in a single application while preserving a consistent command-first user experience.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -119,20 +144,21 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
+The `Model` component stores the in-memory state of MyCelia.
+
+Unlike the original AB3 model, MyCelia manages two related sets of domain data: the **Company Book** and the **Delivery Book**. As a result, the `Model` component stores both `Company` objects and `Delivery` objects, together with their corresponding filtered lists for display and command execution.
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* stores all `Company` objects in the Company Book.
+* stores all `Delivery` objects in the Delivery Book.
+* stores the currently filtered company list as an unmodifiable `ObservableList<Company>`, so that the UI can automatically update when the displayed company data changes.
+* stores the currently filtered delivery list as an unmodifiable `ObservableList<Delivery>`, so that the UI can automatically update when the displayed delivery data changes.
+* stores a mode flag indicating whether the application is currently operating in Company Book mode or Delivery Book mode.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
+* does not depend on the `UI`, `Logic`, or `Storage` components, since the model represents the domain state of the application independently of how it is displayed, parsed, or persisted.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
+This design allows MyCelia to support two related workflows in a single application while keeping the company and delivery data logically separated.
 
 ### Storage component
 
@@ -140,10 +166,18 @@ The `Model` component,
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
+The `Storage` component is responsible for persisting MyCelia’s data on disk and reading it back when the application starts.
+
+Since MyCelia manages both company data and delivery data, the storage layer is responsible for saving and loading both parts of the application state, in addition to user preferences.
+
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+* can save both company-related data and delivery-related data in JSON format, and read them back into the corresponding model objects.
+* can save and load user preference data.
+* acts as the bridge between the hard disk representation of the application state and the in-memory model representation.
+* depends on classes in the `Model` component because its purpose is to serialize and deserialize domain objects owned by the model.
+
+This design ensures that changes made to either the Company Book or the Delivery Book can be preserved across application restarts while keeping persistence concerns separate from the in-memory business logic.
 
 ### Common classes
 
