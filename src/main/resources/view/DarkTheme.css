@@ -4,21 +4,21 @@
 
    DESIGN TOKENS
    ────────────────────────────────────────────────────────────────
-   Page background      #F4F7F9   cold-white canvas
+   Page background      #EFF6FF   cold-white canvas
    Surface              #FFFFFF   card / panel surface
-   Surface alt          #EEF3F6   secondary surface
-   Surface teal-tint    #DFF7F3   selected / active tint
+   Surface alt          #DBEAFE   secondary surface
+   Surface teal-tint    #DBEAFE   selected / active tint
 
-   Border               #D8E1E8   default dividers
-   Border strong        #B8C5D0   prominent dividers
+   Border               #BFDBFE   default dividers
+   Border strong        #93C5FD   prominent dividers
 
-   Text primary         #102A43   navy-slate
-   Text secondary       #627D98   muted slate
-   Text faint           #9AA5B1   placeholders, hints
+   Text primary         #1E3A8A   navy-slate
+   Text secondary       #4E6E9B   muted slate
+   Text faint           #93B4D4   placeholders, hints
 
-   Primary teal         #0F766E
-   Primary teal hover   #115E59
-   Primary teal soft    #DFF7F3
+   Primary teal         #2563EB
+   Primary teal hover   #1D4ED8
+   Primary teal soft    #DBEAFE
 
    Deadline amber bg    #FFF7E8
    Deadline amber text  #92400E
@@ -32,27 +32,27 @@
    ═══════════════════════════════════════ */
 
 .background {
-    -fx-background-color: #F4F7F9;
+    -fx-background-color: #EFF6FF;
 }
 
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold", "SF Pro Text", "Inter", "Helvetica Neue", sans-serif;
-    -fx-text-fill: #627D98;
+    -fx-text-fill: #4E6E9B;
     -fx-opacity: 0.9;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold", "SF Pro Text", "Inter", "Helvetica Neue", sans-serif;
-    -fx-text-fill: #102A43;
+    -fx-text-fill: #1E3A8A;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 28pt;
     -fx-font-family: "Segoe UI Light", "SF Pro Display", "Inter", "Helvetica Neue", sans-serif;
-    -fx-text-fill: #102A43;
+    -fx-text-fill: #1E3A8A;
     -fx-opacity: 1;
 }
 
@@ -66,7 +66,7 @@
    ═══════════════════════════════════════ */
 
 .app-shell {
-    -fx-background-color: #F4F7F9;
+    -fx-background-color: #EFF6FF;
 }
 
 /* ═══════════════════════════════════════
@@ -79,14 +79,14 @@
     -fx-min-height: 52;
     -fx-pref-height: 52;
     -fx-max-height: 52;
-    -fx-border-color: transparent transparent #E8EEF3 transparent;
+    -fx-border-color: transparent transparent #BFDBFE transparent;
     -fx-border-width: 0 0 1 0;
 }
 
 .app-title {
     -fx-font-size: 14pt;
     -fx-font-family: "Segoe UI Semibold", "SF Pro Display", "Inter", "Helvetica Neue", sans-serif;
-    -fx-text-fill: #0F766E;
+    -fx-text-fill: #2563EB;
     -fx-opacity: 1;
     -fx-letter-spacing: 0.5;
 }
@@ -95,10 +95,9 @@
    after .button to ensure correct cascade override */
 
 .pill-toggle {
-    -fx-background-color: #EEF3F6;
-    -fx-background-radius: 8;
-    -fx-padding: 3 3 3 3;
-    -fx-spacing: 1;
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-spacing: 2;
 }
 
 /* ───────── User address badge ───────── */
@@ -106,9 +105,10 @@
 .user-address-label {
     -fx-font-size: 9pt;
     -fx-font-family: "Segoe UI", "SF Pro Text", "Inter", sans-serif;
-    -fx-text-fill: #9AA5B1;
-    -fx-padding: 0;
+    -fx-text-fill: #93B4D4;
+    -fx-padding: 0 0 0 8;
     -fx-background-color: transparent;
+    -fx-max-width: 260;
 }
 
 /* ═══════════════════════════════════════
@@ -117,7 +117,7 @@
 
 .console-area {
     -fx-background-color: #FFFFFF;
-    -fx-border-color: transparent transparent #D8E1E8 transparent;
+    -fx-border-color: transparent transparent #BFDBFE transparent;
     -fx-border-width: 0 0 1 0;
 }
 
@@ -136,7 +136,7 @@
 .command-prompt {
     -fx-font-family: "JetBrains Mono", "SF Mono", "Cascadia Code", "Consolas", "Courier New", monospace;
     -fx-font-size: 13pt;
-    -fx-text-fill: #0F766E;
+    -fx-text-fill: #2563EB;
     -fx-padding: 5 6 5 0;
 }
 
@@ -146,9 +146,9 @@
     -fx-border-width: 0;
     -fx-font-family: "JetBrains Mono", "SF Mono", "Cascadia Code", "Consolas", "Courier New", monospace;
     -fx-font-size: 11.5pt;
-    -fx-text-fill: #102A43;
+    -fx-text-fill: #1E3A8A;
     -fx-padding: 5 0 5 0;
-    -fx-prompt-text-fill: #B8C5D0;
+    -fx-prompt-text-fill: #93C5FD;
 }
 
 #commandTextField:focused {
@@ -158,7 +158,7 @@
 .command-hint {
     -fx-font-family: "JetBrains Mono", "SF Mono", "Cascadia Code", "Consolas", "Courier New", monospace;
     -fx-font-size: 9pt;
-    -fx-text-fill: #B8C5D0;
+    -fx-text-fill: #93C5FD;
     -fx-padding: 0 0 4 0;
 }
 
@@ -175,7 +175,7 @@
     -fx-border-width: 0;
     -fx-font-family: "Segoe UI", "SF Pro Text", "Inter", sans-serif;
     -fx-font-size: 10pt;
-    -fx-text-fill: #627D98;
+    -fx-text-fill: #4E6E9B;
     -fx-min-height: 0;
     -fx-pref-height: 0;
 }
@@ -194,7 +194,7 @@
 }
 
 .result-display .label {
-    -fx-text-fill: #627D98 !important;
+    -fx-text-fill: #4E6E9B !important;
 }
 
 .result-display .content {
@@ -210,7 +210,7 @@
 
 .tab-pane {
     -fx-padding: 0;
-    -fx-background-color: #F4F7F9;
+    -fx-background-color: #EFF6FF;
 }
 
 .tab-pane .tab-header-area {
@@ -222,12 +222,12 @@
 
 .tab-pane .tab-content-area {
     -fx-padding: 0;
-    -fx-background-color: #F4F7F9;
+    -fx-background-color: #EFF6FF;
 }
 
 /* Content pane inside each tab */
 .content-pane {
-    -fx-background-color: #F4F7F9;
+    -fx-background-color: #EFF6FF;
 }
 
 /* ═══════════════════════════════════════
@@ -261,20 +261,20 @@
 }
 
 .list-cell:filled:hover {
-    -fx-background-color: #F4F7F9;
+    -fx-background-color: #EFF6FF;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #DFF7F3;
+    -fx-background-color: #DBEAFE;
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #0F766E;
+    -fx-border-color: #3B82F6;
     -fx-border-width: 0 0 0 3;
 }
 
 .list-cell .label {
-    -fx-text-fill: #102A43;
+    -fx-text-fill: #1E3A8A;
 }
 
 /* ═══════════════════════════════════════
@@ -283,7 +283,7 @@
 
 #cardPane {
     -fx-background-color: transparent;
-    -fx-border-color: transparent transparent #EEF3F6 transparent;
+    -fx-border-color: transparent transparent #DBEAFE transparent;
     -fx-border-width: 0 0 1 0;
 }
 
@@ -291,7 +291,7 @@
 .card-index {
     -fx-font-family: "Segoe UI", "SF Pro Text", "Inter", sans-serif;
     -fx-font-size: 10px;
-    -fx-text-fill: #9AA5B1;
+    -fx-text-fill: #93B4D4;
     -fx-min-width: 24;
 }
 
@@ -299,27 +299,27 @@
 .card-name {
     -fx-font-family: "Segoe UI Semibold", "SF Pro Text", "Inter", sans-serif;
     -fx-font-size: 13px;
-    -fx-text-fill: #102A43;
+    -fx-text-fill: #1E3A8A;
 }
 
 /* Metadata row — phone, email, address, company */
 .card-meta {
     -fx-font-family: "Segoe UI", "SF Pro Text", "Inter", sans-serif;
     -fx-font-size: 11px;
-    -fx-text-fill: #627D98;
+    -fx-text-fill: #4E6E9B;
 }
 
 /* Legacy classes (still used in RoutePanel, etc.) */
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold", "SF Pro Text", "Inter", sans-serif;
     -fx-font-size: 13px;
-    -fx-text-fill: #102A43;
+    -fx-text-fill: #1E3A8A;
 }
 
 .cell_small_label {
     -fx-font-family: "Segoe UI", "SF Pro Text", "Inter", sans-serif;
     -fx-font-size: 11px;
-    -fx-text-fill: #627D98;
+    -fx-text-fill: #4E6E9B;
 }
 
 /* ═══════════════════════════════════════
@@ -332,8 +332,8 @@
 }
 
 #tags .label {
-    -fx-text-fill: #0F766E;
-    -fx-background-color: #DFF7F3;
+    -fx-text-fill: #2563EB;
+    -fx-background-color: #DBEAFE;
     -fx-padding: 2 7 2 7;
     -fx-border-radius: 4;
     -fx-background-radius: 4;
@@ -363,20 +363,20 @@
    ═══════════════════════════════════════ */
 
 .check-box {
-    -fx-text-fill: #102A43;
+    -fx-text-fill: #1E3A8A;
 }
 
 .check-box .box {
     -fx-background-color: #FFFFFF;
-    -fx-border-color: #B8C5D0;
+    -fx-border-color: #93C5FD;
     -fx-border-radius: 4;
     -fx-background-radius: 4;
     -fx-padding: 3;
 }
 
 .check-box:selected .box {
-    -fx-background-color: #0F766E;
-    -fx-border-color: #0F766E;
+    -fx-background-color: #2563EB;
+    -fx-border-color: #2563EB;
 }
 
 .check-box:selected .mark {
@@ -384,7 +384,7 @@
 }
 
 .check-box .box:hover {
-    -fx-border-color: #0F766E;
+    -fx-border-color: #2563EB;
 }
 
 /* ═══════════════════════════════════════
@@ -393,28 +393,28 @@
 
 .button {
     -fx-padding: 6 16 6 16;
-    -fx-border-color: #D8E1E8;
+    -fx-border-color: #BFDBFE;
     -fx-border-width: 1;
     -fx-border-radius: 6;
     -fx-background-radius: 6;
     -fx-background-color: #FFFFFF;
     -fx-font-family: "Segoe UI Semibold", "SF Pro Text", "Inter", sans-serif;
     -fx-font-size: 10pt;
-    -fx-text-fill: #102A43;
+    -fx-text-fill: #1E3A8A;
     -fx-cursor: hand;
 }
 
 .button:hover {
-    -fx-background-color: #EEF3F6;
-    -fx-border-color: #B8C5D0;
+    -fx-background-color: #DBEAFE;
+    -fx-border-color: #93C5FD;
 }
 
 .button:pressed {
-    -fx-background-color: #DDE5EC;
+    -fx-background-color: #DBEAFE;
 }
 
 .button:focused {
-    -fx-border-color: #0F766E;
+    -fx-border-color: #2563EB;
 }
 
 .button:disabled {
@@ -424,11 +424,11 @@
 /* Filled primary action button — Plan Today's Route */
 .action-button {
     -fx-padding: 6 16 6 16;
-    -fx-border-color: #0D6660;
+    -fx-border-color: #1D4ED8;
     -fx-border-width: 1;
     -fx-border-radius: 6;
     -fx-background-radius: 6;
-    -fx-background-color: #0F766E;
+    -fx-background-color: #2563EB;
     -fx-font-family: "Segoe UI Semibold", "SF Pro Text", "Inter", sans-serif;
     -fx-font-size: 10pt;
     -fx-text-fill: #FFFFFF;
@@ -436,12 +436,12 @@
 }
 
 .action-button:hover {
-    -fx-background-color: #115E59;
-    -fx-border-color: #115E59;
+    -fx-background-color: #1D4ED8;
+    -fx-border-color: #1D4ED8;
 }
 
 .action-button:pressed {
-    -fx-background-color: #134E4A;
+    -fx-background-color: #1E40AF;
 }
 
 .action-button:disabled {
@@ -451,11 +451,11 @@
 /* Route panel plan button — same primary style */
 .plan-routes-button {
     -fx-padding: 6 16 6 16;
-    -fx-border-color: #0D6660;
+    -fx-border-color: #1D4ED8;
     -fx-border-width: 1;
     -fx-border-radius: 6;
     -fx-background-radius: 6;
-    -fx-background-color: #0F766E;
+    -fx-background-color: #2563EB;
     -fx-font-family: "Segoe UI Semibold", "SF Pro Text", "Inter", sans-serif;
     -fx-font-size: 10pt;
     -fx-text-fill: #FFFFFF;
@@ -463,18 +463,18 @@
 }
 
 .plan-routes-button:hover {
-    -fx-background-color: #115E59;
+    -fx-background-color: #1D4ED8;
 }
 
 /* Default JavaFX button override */
 .button:default {
-    -fx-background-color: #0F766E;
+    -fx-background-color: #2563EB;
     -fx-text-fill: #FFFFFF;
-    -fx-border-color: #0D6660;
+    -fx-border-color: #1D4ED8;
 }
 
 .button:default:hover {
-    -fx-background-color: #115E59;
+    -fx-background-color: #1D4ED8;
 }
 
 /* ═══════════════════════════════════════
@@ -482,7 +482,7 @@
    ═══════════════════════════════════════ */
 
 .route-pane {
-    -fx-background-color: #F4F7F9;
+    -fx-background-color: #EFF6FF;
     -fx-padding: 16 16 0 16;
     -fx-spacing: 8;
 }
@@ -490,19 +490,19 @@
 .section-title {
     -fx-font-family: "Segoe UI Semibold", "SF Pro Text", "Inter", sans-serif;
     -fx-font-size: 11pt;
-    -fx-text-fill: #627D98;
+    -fx-text-fill: #4E6E9B;
     -fx-letter-spacing: 1;
 }
 
 .route-status {
     -fx-font-family: "Segoe UI", "SF Pro Text", "Inter", sans-serif;
     -fx-font-size: 10pt;
-    -fx-text-fill: #627D98;
+    -fx-text-fill: #4E6E9B;
 }
 
 .map-container {
     -fx-background-color: #FFFFFF;
-    -fx-border-color: #D8E1E8;
+    -fx-border-color: #BFDBFE;
     -fx-border-width: 1;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
@@ -514,7 +514,7 @@
 
 .status-bar {
     -fx-background-color: #FFFFFF;
-    -fx-border-color: #E8EEF3 transparent transparent transparent;
+    -fx-border-color: #BFDBFE transparent transparent transparent;
     -fx-border-width: 1 0 0 0;
     -fx-padding: 0 20 0 20;
     -fx-min-height: 26;
@@ -524,18 +524,18 @@
 
 .status-bar .label {
     -fx-font-family: "Segoe UI", "SF Pro Text", "Inter", sans-serif;
-    -fx-text-fill: #9AA5B1;
+    -fx-text-fill: #93B4D4;
     -fx-font-size: 9pt;
 }
 
 .status-bar-with-border {
     -fx-background-color: #FFFFFF;
-    -fx-border-color: #E8EEF3;
+    -fx-border-color: #BFDBFE;
     -fx-border-width: 1 0 0 0;
 }
 
 .status-bar-with-border .label {
-    -fx-text-fill: #9AA5B1;
+    -fx-text-fill: #93B4D4;
 }
 
 /* ═══════════════════════════════════════
@@ -544,7 +544,7 @@
 
 .autocomplete-popup {
     -fx-background-color: #FFFFFF;
-    -fx-border-color: #D8E1E8;
+    -fx-border-color: #BFDBFE;
     -fx-border-width: 1;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
@@ -577,25 +577,25 @@
 }
 
 .autocomplete-list .list-cell:filled:hover {
-    -fx-background-color: #EEF3F6;
+    -fx-background-color: #DBEAFE;
     -fx-background-radius: 5;
 }
 
 .autocomplete-list .list-cell:filled:selected {
-    -fx-background-color: #DFF7F3;
+    -fx-background-color: #DBEAFE;
     -fx-background-radius: 5;
 }
 
 .autocomplete-cmd {
     -fx-font-family: "JetBrains Mono", "SF Mono", "Cascadia Code", "Consolas", monospace;
     -fx-font-size: 10pt;
-    -fx-text-fill: #0F766E;
+    -fx-text-fill: #2563EB;
 }
 
 .autocomplete-desc {
     -fx-font-family: "Segoe UI", "SF Pro Text", "Inter", sans-serif;
     -fx-font-size: 10pt;
-    -fx-text-fill: #9AA5B1;
+    -fx-text-fill: #93B4D4;
 }
 
 /* ═══════════════════════════════════════
@@ -607,13 +607,13 @@
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: #D8E1E8;
+    -fx-background-color: #BFDBFE;
     -fx-background-radius: 4;
     -fx-background-insets: 3;
 }
 
 .scroll-bar .thumb:hover {
-    -fx-background-color: #B8C5D0;
+    -fx-background-color: #93C5FD;
 }
 
 .scroll-bar .increment-button,
@@ -652,18 +652,18 @@
 .dialog-pane > *.label.content {
     -fx-font-size: 13px;
     -fx-font-weight: bold;
-    -fx-text-fill: #102A43;
+    -fx-text-fill: #1E3A8A;
 }
 
 .dialog-pane:header *.header-panel {
-    -fx-background-color: #F4F7F9;
+    -fx-background-color: #EFF6FF;
 }
 
 .dialog-pane:header *.header-panel *.label {
     -fx-font-size: 16px;
     -fx-font-style: italic;
-    -fx-fill: #102A43;
-    -fx-text-fill: #102A43;
+    -fx-fill: #1E3A8A;
+    -fx-text-fill: #1E3A8A;
 }
 
 /* ═══════════════════════════════════════
@@ -672,14 +672,14 @@
 
 .context-menu {
     -fx-background-color: #FFFFFF;
-    -fx-border-color: #D8E1E8;
+    -fx-border-color: #BFDBFE;
     -fx-border-radius: 8;
     -fx-background-radius: 8;
     -fx-effect: dropshadow(gaussian, rgba(16,42,67,0.12), 12, 0, 0, 4);
 }
 
 .context-menu .label {
-    -fx-text-fill: #102A43;
+    -fx-text-fill: #1E3A8A;
 }
 
 .menu-bar {
@@ -689,38 +689,38 @@
 .menu-bar .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI", "SF Pro Text", "Inter", sans-serif;
-    -fx-text-fill: #102A43;
+    -fx-text-fill: #1E3A8A;
 }
 
 .menu .left-container {
-    -fx-background-color: #F4F7F9;
+    -fx-background-color: #EFF6FF;
 }
 
 .split-pane {
     -fx-border-radius: 0;
     -fx-border-width: 0;
-    -fx-background-color: #F4F7F9;
+    -fx-background-color: #EFF6FF;
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: #F4F7F9;
-    -fx-border-color: #D8E1E8;
+    -fx-background-color: #EFF6FF;
+    -fx-border-color: #BFDBFE;
 }
 
 .stack-pane {
-    -fx-background-color: #F4F7F9;
+    -fx-background-color: #EFF6FF;
 }
 
 .pane-with-border {
-    -fx-background-color: #F4F7F9;
-    -fx-border-color: #D8E1E8;
+    -fx-background-color: #EFF6FF;
+    -fx-border-color: #BFDBFE;
     -fx-border-top-width: 1px;
 }
 
 .table-view {
-    -fx-base: #F4F7F9;
+    -fx-base: #EFF6FF;
     -fx-control-inner-background: #FFFFFF;
-    -fx-background-color: #F4F7F9;
+    -fx-background-color: #EFF6FF;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
@@ -734,14 +734,14 @@
     -fx-size: 35;
     -fx-border-width: 0 0 1 0;
     -fx-background-color: transparent;
-    -fx-border-color: transparent transparent #D8E1E8 transparent;
+    -fx-border-color: transparent transparent #BFDBFE transparent;
     -fx-border-insets: 0 10 1 0;
 }
 
 .table-view .column-header .label {
     -fx-font-size: 18pt;
     -fx-font-family: "Segoe UI Light", "SF Pro Display", "Inter", sans-serif;
-    -fx-text-fill: #102A43;
+    -fx-text-fill: #1E3A8A;
     -fx-alignment: center-left;
     -fx-opacity: 1;
 }
@@ -769,47 +769,72 @@
 
 /* ═══════════════════════════════════════
    19. PILL BUTTONS
-   (must be defined AFTER .button to win the cascade — do not move)
+   Compound selector .pill-toggle .button has specificity (0,2,0),
+   higher than single-class rules — so it wins all state transitions
+   and prevents any border flash during style-class switching.
    ═══════════════════════════════════════ */
 
-.pill-button {
+/* Hard reset: every state of every button inside a pill container */
+.pill-toggle .button,
+.pill-toggle .button:hover,
+.pill-toggle .button:pressed,
+.pill-toggle .button:focused,
+.pill-toggle .button:default,
+.pill-toggle .button:disabled {
     -fx-background-color: transparent;
     -fx-background-radius: 6;
     -fx-border-color: transparent;
     -fx-border-width: 0;
-    -fx-text-fill: #627D98;
+    -fx-effect: none;
+    -fx-padding: 5 12 5 12;
     -fx-font-family: "Segoe UI Semibold", "SF Pro Text", "Inter", sans-serif;
     -fx-font-size: 10pt;
-    -fx-padding: 5 16 5 16;
     -fx-cursor: hand;
+}
+
+/* Inactive — muted text */
+.pill-toggle .pill-button   { -fx-text-fill: #4E6E9B; }
+
+/* Hover — slightly darker text */
+.pill-toggle .pill-button:hover { -fx-background-color: #DBEAFE; -fx-text-fill: #1E3A8A; }
+
+/* Active — teal text + bottom underline (uses compound for highest priority) */
+.pill-toggle .pill-button-active,
+.pill-toggle .pill-button-active:hover,
+.pill-toggle .pill-button-active:pressed,
+.pill-toggle .pill-button-active:focused {
+    -fx-text-fill: #2563EB;
+    -fx-border-color: transparent transparent #2563EB transparent;
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 5 12 3 12;
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
     -fx-effect: none;
 }
 
-.pill-button:hover {
-    -fx-background-color: #DDE5EC;
-    -fx-border-color: transparent;
-    -fx-text-fill: #102A43;
-    -fx-effect: none;
-}
+/* ───────── Top-bar Help button ───────── */
 
-.pill-button:focused {
-    -fx-border-color: transparent;
-    -fx-effect: none;
-}
-
-.pill-button-active {
-    -fx-background-color: #FFFFFF;
+.topbar-help-button {
+    -fx-background-color: transparent;
     -fx-background-radius: 6;
     -fx-border-color: transparent;
     -fx-border-width: 0;
-    -fx-text-fill: #0F766E;
+    -fx-text-fill: #4E6E9B;
     -fx-font-family: "Segoe UI Semibold", "SF Pro Text", "Inter", sans-serif;
     -fx-font-size: 10pt;
-    -fx-padding: 5 16 5 16;
+    -fx-padding: 5 12 5 12;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(16,42,67,0.10), 3, 0, 0, 1);
+    -fx-effect: none;
 }
 
-.pill-button-active:focused {
+.topbar-help-button:hover {
+    -fx-background-color: #DBEAFE;
     -fx-border-color: transparent;
+    -fx-text-fill: #1E3A8A;
+    -fx-effect: none;
+}
+
+.topbar-help-button:focused {
+    -fx-border-color: transparent;
+    -fx-effect: none;
 }

@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="MyCelia" minWidth="620" minHeight="650" onCloseRequest="#handleExit">
+         title="MyCelia" minWidth="600" minHeight="650" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -55,6 +55,11 @@
           </HBox>
 
           <Region HBox.hgrow="ALWAYS" />
+
+          <!-- Help in its own pill container — same height as nav pills -->
+          <HBox styleClass="pill-toggle" alignment="CENTER_LEFT">
+            <Button text="Help" onAction="#handleHelp" styleClass="pill-button" />
+          </HBox>
 
           <Label fx:id="userAddressLabel" styleClass="user-address-label" />
         </HBox>
