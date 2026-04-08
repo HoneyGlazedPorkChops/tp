@@ -4,7 +4,7 @@
 
 MyCelia is a command-line-driven desktop application for B2B delivery coordinators. Manage your business contacts and track outgoing deliveries — all from a single keyboard-driven interface. No clicking around. Just type and go.
 
-![MyCelia Main Window](images/main-window.png)
+![MyCelia Main Window](images/ui-overview.png)
 
 ---
 
@@ -37,6 +37,8 @@ MyCelia can be used entirely by keyboard, but several actions are also accessibl
 
 ### Navigation Bar
 
+![Navigation Bar](images/navigation-bar.png)
+
 At the top of the window is a pill toggle bar with navigation buttons:
 
 |Button|What it does|
@@ -48,7 +50,7 @@ At the top of the window is a pill toggle bar with navigation buttons:
 
 ### Command Terminal
 
-![UI Tabs and Buttons](images/command-terminal.png)
+![Command Terminal](images/command-terminal.png)
 
 |Box|What it does|
 |-|-|
@@ -78,6 +80,8 @@ The Company Book view shows all your business contacts. Each entry displays the 
 The Delivery Book view shows all logged deliveries. Deliveries marked as delivered will display a `delivered` tag. You can check individual deliveries using their checkboxes to select them for route planning. A **Plan Today's Route** button at the top of the list becomes active when at least one delivery is selected — clicking it opens the Routes tab and plans the route. Below is the location the data is saved.
 
 ### Routes View
+
+![Routes View](images/routes-view.png)
 
 The Routes view displays an interactive map with the optimised route for selected deliveries. Switch to it using the **Routes** pill button, or trigger it automatically via the `route` command or the **Plan Today's Route** button.
 
