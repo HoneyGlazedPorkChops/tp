@@ -86,3 +86,68 @@ defaultTasks 'clean', 'test'
 run {
     enableAssertions = true
 }
+
+// ── ProGuard obfuscation ──────────────────────────────────────────────────────
+// Runs after shadowJar to produce an obfuscated release JAR.
+// Apply with: ./gradlew obfuscate
+// Output: build/libs/MyCelia-obfuscated.jar
+
+configurations {
+    proguard
+}
+
+dependencies {
+    proguard 'com.guardsquare:proguard-base:7.4.1'
+}
+
+task obfuscate(type: JavaExec, dependsOn: shadowJar) {
+    group = 'build'
+    description = 'Produces an obfuscated JAR via ProGuard'
+
+    classpath = configurations.proguard
+    mainClass = 'proguard.ProGuard'
+
+    def inputJar  = shadowJar.archiveFile.get().asFile.absolutePath
+    def outputJar = file("build/libs/MyCelia-obfuscated.jar").absolutePath
+    def javaHome  = System.getProperty("java.home")
+
+    args = [
+        '-injars',       inputJar,
+        '-outjars',      outputJar,
+        '-libraryjars',  "${javaHome}/jmods/java.base.jmod(!**.jar;!module-info.class)",
+        '-libraryjars',  "${javaHome}/jmods/java.desktop.jmod(!**.jar;!module-info.class)",
+        '-libraryjars',  "${javaHome}/jmods/java.logging.jmod(!**.jar;!module-info.class)",
+        '-libraryjars',  "${javaHome}/jmods/java.xml.jmod(!**.jar;!module-info.class)",
+        '-libraryjars',  "${javaHome}/jmods/javafx.base.jmod(!**.jar;!module-info.class)",
+        '-libraryjars',  "${javaHome}/jmods/javafx.controls.jmod(!**.jar;!module-info.class)",
+        '-libraryjars',  "${javaHome}/jmods/javafx.fxml.jmod(!**.jar;!module-info.class)",
+        '-libraryjars',  "${javaHome}/jmods/javafx.graphics.jmod(!**.jar;!module-info.class)",
+        '-libraryjars',  "${javaHome}/jmods/javafx.web.jmod(!**.jar;!module-info.class)",
+
+        // Entry point — must stay named
+        '-keep', 'class seedu.address.Main { public static void main(java.lang.String[]); }',
+
+        // FXML loads UI classes by name — must keep
+        '-keep', 'class seedu.address.ui.** { *; }',
+
+        // @FXML methods called by reflection
+        '-keepclassmembers', 'class * { @javafx.fxml.FXML *; }',
+
+        // Jackson deserializes JSON by field name
+        '-keepclassmembers', 'class seedu.address.storage.JsonAdapted* { *; }',
+        '-keepclassmembers', 'class seedu.address.storage.JsonSerializable* { *; }',
+
+        // Keep all annotations
+        '-keepattributes', '*Annotation*',
+
+        // Obfuscation options
+        '-obfuscationdictionary',    'build/libs/MyCelia-obfuscated.jar',
+        '-dontusemixedcaseclassnames',
+        '-overloadaggressively',
+        '-allowaccessmodification',
+        '-ignorewarnings',
+
+        // Suppress notes about reflection
+        '-dontnote',
+    ]
+}
