@@ -275,15 +275,23 @@ Step 1: The user inputs `select 1 2 4` to select deliveries 1, 2 and 4 for routi
 
 Step 2: `Logic` executes the `SelectCommand` which shows the selected deliveries on the UI, allowing the user to check their selection.
 
-The following diagram illustrates how the selected deliveries will be displayed on the UI
+The following diagram illustrates how the select command goes through the `Logic` component:
+
+![SelectSequenceDiagram](diagrams/SelectSequenceDiagram.svg)
 
 Step 3: The user confirms their selection and inputs `route`.
 
-Step 4: `RouteCommand#execute(Model)` calls `model.getSelectedDeliveriesInDisplayOrder()` to retrieve the list of currently selected deliveries. If the list is empty, a `CommandException` is thrown.
+The following diagram illustrates how the select command goes through the `Logic` component:
+![RouteSequenceDiagram](diagrams/RouteSequenceDiagram.svg)
 
-Step 5: A `CommandResult` is returned containing the selected deliveries and a success message. The UI responds by switching to the Routes view to display the planned route.
+Step 4: `RouteCommand` calls that `planRoutesFor()::RoutePanel` which checks for overdue deadlines and geocodes the addresses into coordinates using `GeocodingService`. If all deliveries are valid, a request is built via `OptimizationService` and sent to the API.
 
-Step 6: The Routes view is shown on the UI with the selected deliveries.
+Step 5: `OptimizationService` parses the response from the API and returns the `RouteResult`.
+
+Step 6: `RoutePanel` displays the `RouteResult` on the UI
+
+The following diagram illustrates the entire process when `planRoutes()` is called:
+![RouterSequenceDiagram](diagrams/RouterSequenceDiagram.svg)
 
 --------------------------------------------------------------------------------------------------------------------
 
