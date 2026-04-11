@@ -151,9 +151,9 @@ The delivery is linked directly to the existing company record instead of storin
 
 |Command|Format|Example|
 |-|-|-|
-|Add|`add pr/PRODUCT c/COMPANY dl/DEADLINE [t/TAG]...`|`add pr/Industrial Printer c/Acme Supplies dl/2026-03-25 14:30 t/urgent`|
+|Add|`add p/PRODUCT c/COMPANY d/DEADLINE [t/TAG]...`|`add p/Industrial Printer c/Acme Supplies d/2026-03-25 14:30 t/urgent`|
 |Delete|`delete INDEX`|`delete 2`|
-|Edit|`edit INDEX [pr/PRODUCT] [c/COMPANY] [dl/DEADLINE] [t/TAG]...`|`edit 1 dl/2026-03-26 09:00 t/fragile`|
+|Edit|`edit INDEX [p/PRODUCT] [c/COMPANY] [d/DEADLINE] [t/TAG]...`|`edit 1 d/2026-03-26 09:00 t/fragile`|
 |Mark delivered|`mark INDEX`|`mark 1`|
 |Unmark|`unmark INDEX`|`unmark 1`|
 |Select for routing|`select INDEX [INDEX]...`|`select 1 3 5`|
@@ -168,9 +168,9 @@ The delivery is linked directly to the existing company record instead of storin
 
 |Prefix|Field|Required|
 |-|-|-|
-|`pr/`|Product name|Yes|
+|`p/`|Product name|Yes|
 |`c/`|Company name|Yes|
-|`dl/`|Deadline (`yyyy-MM-dd HH:mm`)|Yes for `add`, optional for `edit`|
+|`d/`|Deadline (`yyyy-MM-dd HH:mm`)|Yes for `add`, optional for `edit`|
 |`t/`|Tag (repeatable)|No|
 
 #### Notes
