@@ -217,7 +217,6 @@ Manage your network of business contacts. These commands are active when you're 
 | Delete        | `delete INDEX`                                                        | `delete 3`                                                                |
 | Filter        | `filter [c/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [t/TAG]...`          | `filter c/Dell t/important`                                               |
 | Clear filter  | `unfilter`                                                            | `unfilter`                                                                |
-| Sort by field | `sort [n/] [p/] [e/] [a/] [t/]`                                       | `sorts the companies by a specific field`                                 |
 | List all      | `list`                                                                | `list`                                                                    |
 | Clear all     | `clear`                                                               | `clear`                                                                   |
 
@@ -369,26 +368,6 @@ Deleting a company automatically deletes its associated deliveries in the Delive
 </div>
 
 For possible errors, refer to the [troubleshooting guide](#troubleshooting-delete-company) below.
-
----
-
-#### Sorting all companies: `sort`
-
-Format:
-```
-sort [n/] [a/] [p/] [e/] [t/]
-```
-
-Displays companies in order, depending on which field selected
-
-Example:
-- `sort n/ t/`
-
-
-<div class="note" markdown="1">
-📝 **Note:**
-The companies are sorted via lexicographical ordering of the fields selected. Doing `sort n/` will sort the companies via the alphabetical order of the names.
-</div>
 
 ---
 
