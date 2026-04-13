@@ -408,21 +408,21 @@ This action is permanent and cannot be undone. Use with caution.
 
 Track outgoing deliveries. Use `switch` or the Deliveries tab to get here from the Company Book.
 
-| Command                | Format                                                       |Example|
-|------------------------|--------------------------------------------------------------|-|
-| Add                    | `add p/PRODUCT c/COMPANY d/DEADLINE [t/TAG]...`              |`add p/Industrial Printer c/Acme Supplies d/2026-03-25 14:30 t/urgent`|
-| Delete                 | `delete INDEX`                                               |`delete 2`|
+| Command                | Format                                                  |Example|
+|------------------------|---------------------------------------------------------|-|
+| Add                    | `add p/PRODUCT c/COMPANY d/DEADLINE [t/TAG]...`         |`add p/Industrial Printer c/Acme Supplies d/2026-03-25 14:30 t/urgent`|
+| Delete                 | `delete INDEX`                                          |`delete 2`|
 | Edit                   | `edit INDEX [p/PRODUCT] [c/COMPANY] [d/DEADLINE] [t/TAG]...` |`edit 1 d/2026-03-26 09:00 t/fragile`|
-| Mark delivered         | `mark INDEX`                                                 |`mark 1`|
-| Unmark                 | `unmark INDEX`                                               |`unmark 1`|
-| Select for routing     | `select INDEX [INDEX]...`                                    |`select 1 3 5`|
-| Clear selection        | `select none`                                                |`select none`|
-| Plan route             | `route`                                                      |`route`|
-| Filter                 | `filter [p/PRODUCT] [c/COMPANY] [d/DEADLINE] [t/TAG]...`     |`filter c/Dell p/Laptop t/fragile`|
-| Reset filter           | `unfilter`                                                   |`unfilter`|
- List all               | `list`                                                       |`list`|
-| Sort delivery by field | `sort [p/] [c/] [a/] [d/] [t/]`                              |`sort c/`|
-| Clear all              | `clear`                                                      |`clear`|
+| Mark delivered         | `mark INDEX`                                            |`mark 1`|
+| Unmark                 | `unmark INDEX`                                          |`unmark 1`|
+| Select for routing     | `select INDEX [INDEX]...`                               |`select 1 3 5`|
+| Clear selection        | `select none`                                           |`select none`|
+| Plan route             | `route`                                                 |`route`|
+| Filter                 | `filter [p/PRODUCT] [c/COMPANY] [d/DEADLINE] [t/TAG]...` |`filter c/Dell p/Laptop t/fragile`|
+| Reset filter           | `unfilter`                                              |`unfilter`|
+ List all               | `list`                                                  |`list`|
+| Sort delivery by field | `sort [p/] [c/] [a/] [d/]`                              |`sort c/`|
+| Clear all              | `clear`                                                 |`clear`|
 
 **Delivery prefixes:**
 
@@ -572,7 +572,7 @@ Filters to a specific company's deliveries and sorts them by deadline.
 
 Format:
 ```
-sort [p/] [c/] [d/] [t/]
+sort [p/] [c/] [d/]
 ```
 
 Example:
