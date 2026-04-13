@@ -245,7 +245,7 @@ Manage your network of business contacts. These commands are active when you're 
 | Add           | `add n/NAME p/PHONE e/EMAIL a/ADDRESS \[t/TAG]...`                    | `add n/Acme Supplies p/62223333 e/hi@acme.com a/10 Anson Road t/supplier` |
 | Edit          | `edit INDEX \[n/NAME] \[p/PHONE] \[e/EMAIL] \[a/ADDRESS] \[t/TAG]...` | `edit 2 p/65559999 e/new@acme.com`                                        |
 | Delete        | `delete INDEX`                                                        | `delete 3`                                                                |
-| Filter        | `filter [c/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [t/TAG]...`          | `filter c/Dell t/important`                                               |
+| Filter        | `filter [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [t/TAG]...`          | `filter c/Dell t/important`                                               |
 | Clear filter  | `unfilter`                                                            | `unfilter`                                                                |
 | List all      | `list`                                                                | `list`                                                                    |
 | Clear all     | `clear`                                                               | `clear`                                                                   |
@@ -342,7 +342,7 @@ Displays companies matching the given keyword(s) across one or more fields.
 
 Format:
 ```
-filter [c/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [t/TAG]...
+filter [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [t/TAG]...
 ```
 
 Examples:
