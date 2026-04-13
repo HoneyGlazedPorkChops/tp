@@ -346,7 +346,7 @@ filter [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [t/TAG]...
 ```
 
 Examples:
-- `filter c/Dell t/important`
+- `filter n/Dell t/important`
 - `filter a/Anson`
 
 <div class="note" markdown="1">
