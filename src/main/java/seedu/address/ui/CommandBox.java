@@ -206,11 +206,7 @@ public class CommandBox extends UiPart<Region> {
             setStyleToIndicateCommandFailure();
             String word = commandText.trim().split("\\s+", 2)[0].toLowerCase();
             Map<String, String> usageMap = model.getCompanyPackage() ? COMPANY_USAGE : DELIVERY_USAGE;
-            if (e instanceof ParseException && usageMap.containsKey(word)) {
-                setHintToErrorUsage(usageMap.get(word));
-            } else {
-                setHintToErrorUsage(e.getMessage());
-            }
+            setHintToErrorUsage(e.getMessage());
         }
     }
 
