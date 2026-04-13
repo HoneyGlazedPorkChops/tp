@@ -855,8 +855,8 @@ Switch to the Delivery Book with `switch` before running these test cases.
 
 Team size: 4
 
-1. **Show a warning when adding a delivery with a past deadline** — currently the app accepts any valid date format regardless of whether the deadline has already passed. Adding a warning for past deadlines would help users catch accidental data entry errors.
+1. **Clearer error message display** — some error messages are longer as there are more restrictions to the command usage. UI will be better accommodating for various lengths of error messages
 
-2. **Support multiple products per delivery** — currently each delivery tracks a single product. Enhancing add in the Delivery Book to accept multiple p/ prefixes would better reflect real-world delivery scenarios where multiple products are shipped together.
+2. **Better UI support for route** — UI displayed for route command is very simple. There are situations where it might cause some overlaps which make user unable to click the deliveries.
 
-3. **Add specific error messages are shown to let user know what went wrong** - currently the text turns red and a valid example will be shown for all forms of invalid command usage. It will be more suitable to indicate to user exactly which field is missing or invalid.
+3. **Add more specific error messages are shown to let user know what went wrong** - currently the text turns red and a valid example will be shown for all forms of invalid command usage. It will be more suitable to indicate to user exactly which field is missing or invalid.

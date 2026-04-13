@@ -127,13 +127,14 @@
     -fx-padding: 4 20 0 20;
     -fx-min-height: 60;
     -fx-pref-height: 60;
-    -fx-max-height: 60;
 }
 
 /* Command input row */
 .command-area {
     -fx-background-color: transparent;
     -fx-spacing: 2;
+    -fx-min-height: 60;
+    -fx-pref-height: 60;
 }
 
 .command-prompt {
@@ -171,7 +172,6 @@
     -fx-padding: 2 20 4 20;
     -fx-min-height: 80;
     -fx-pref-height: 80;
-    -fx-max-height: 80;
 }
 
 .result-display {

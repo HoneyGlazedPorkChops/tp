@@ -40,7 +40,7 @@ public class CommandBox extends UiPart<Region> {
         COMPANY_COMMANDS.put("add", "n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...");
         COMPANY_COMMANDS.put("edit", "INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...");
         COMPANY_COMMANDS.put("delete", "INDEX");
-        COMPANY_COMMANDS.put("filter", "[c/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [t/TAG]...");
+        COMPANY_COMMANDS.put("filter", "[n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [t/TAG]...");
         COMPANY_COMMANDS.put("unfilter", "");
         COMPANY_COMMANDS.put("list", "");
         COMPANY_COMMANDS.put("clear", "");
