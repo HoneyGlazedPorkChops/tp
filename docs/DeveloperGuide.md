@@ -10,34 +10,26 @@ title: Developer Guide
 ## **Acknowledgements**
 
 ### External Services
-| Library / Tool | Purpose |
-|----------------|---------|
-| [OpenRouteService](https://openrouteservice.org/) | Route planning API |
-| [Leaflet.js](https://leafletjs.com/) | Interactive map rendering |
+- [OpenRouteService](https://openrouteservice.org/) — Route planning API
+- [Leaflet.js](https://leafletjs.com/) — Interactive map rendering
 
 ### Security & Build Tools
-| Library / Tool | Version |
-|----------------|---------|
-| [ProGuard](https://www.guardsquare.com/proguard) | 7.7.0 |
-| [Aidsfuscator](https://github.com/LvStrnggg/aidsfuscator) | 0.7.0 |
-| [Gradle](https://gradle.org/) | — |
-| [Shadow Plugin](https://github.com/johnrengelman/shadow) | 7.1.2 |
-| [JaCoCo](https://www.jacoco.org/) | — |
-| [Checkstyle](https://checkstyle.org/) | 11.0.0 |
+- [ProGuard](https://www.guardsquare.com/proguard) 7.7.0
+- [Aidsfuscator](https://github.com/LvStrnggg/aidsfuscator) 0.7.0
+- [Gradle](https://gradle.org/)
+- [Shadow Plugin](https://github.com/johnrengelman/shadow) 7.1.2
+- [JaCoCo](https://www.jacoco.org/)
+- [Checkstyle](https://checkstyle.org/) 11.0.0
 
 ### Libraries
-| Library / Tool | Version |
-|----------------|---------|
-| [JavaFX](https://openjfx.io/) | 17.0.7 |
-| [Jackson Databind](https://github.com/FasterXML/jackson-databind) | 2.7.0 |
-| [Jackson Datatype JSR310](https://github.com/FasterXML/jackson-modules-java8) | 2.7.4 |
-| [org.json](https://github.com/stleary/JSON-java) | 20231013 |
-| [JUnit Jupiter](https://junit.org/junit5/) | 5.4.0 |
+- [JavaFX](https://openjfx.io/) 17.0.7
+- [Jackson Databind](https://github.com/FasterXML/jackson-databind) 2.7.0
+- [Jackson Datatype JSR310](https://github.com/FasterXML/jackson-modules-java8) 2.7.4
+- [org.json](https://github.com/stleary/JSON-java) 20231013
+- [JUnit Jupiter](https://junit.org/junit5/) 5.4.0
 
 ### AI Tools
-| Tool | Extent of Use |
-|------|--------------|
-| [Claude Sonnet 4.6](https://www.anthropic.com/) | Used as a coding and documentation aid; all suggestions were reviewed and adapted by the team before merging |
+- [Claude Sonnet 4.6](https://www.anthropic.com/) — Used as a coding and documentation aid; all suggestions were reviewed and adapted by the team before merging
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -860,3 +852,5 @@ Team size: 4
 2. **Better UI support for route** — UI displayed for route command is very simple. There are situations where it might cause some overlaps which make user unable to click the deliveries.
 
 3. **Add more specific error messages are shown to let user know what went wrong** - currently the text turns red and a valid example will be shown for all forms of invalid command usage. It will be more suitable to indicate to user exactly which field is missing or invalid.
+
+4. **Better support for different OS** - There are some known issues such as being unable to use route command for different OS systems like `linux`. Better support for different systems will be implemented in the future.
