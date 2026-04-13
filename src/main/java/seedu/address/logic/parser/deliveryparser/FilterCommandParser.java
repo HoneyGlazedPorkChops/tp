@@ -44,44 +44,51 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-        List<CompanyNameContainsKeywordsPredicate> companies =
-                argMultimap.getAllValues(PREFIX_COMPANY).stream()
-                        .map(x -> {
-                            try {
-                                return ParserUtil.parseCompany(x);
-                            } catch (ParseException e) {
-                                throw new RuntimeException(e);
-                            }
-                        })
-                        .toList();
+        List<CompanyNameContainsKeywordsPredicate> companies;
+        List<ProductContainsKeywordsPredicate> products;
+        List<String> tags;
+        List<LocalDate[]> timeRanges;
+        try {
+            companies = argMultimap.getAllValues(PREFIX_COMPANY).stream()
+                    .map(x -> {
+                        try {
+                            return ParserUtil.parseCompany(x);
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+                    })
+                    .toList();
 
-        List<ProductContainsKeywordsPredicate> products =
-                argMultimap.getAllValues(PREFIX_PRODUCT).stream()
-                        .map(x -> {
-                            try {
-                                return ParserUtil.parseProductName(x);
-                            } catch (ParseException e) {
-                                throw new RuntimeException(e);
-                            }
-                        })
-                        .toList();
+            products = argMultimap.getAllValues(PREFIX_PRODUCT).stream()
+                    .map(x -> {
+                        try {
+                            return ParserUtil.parseProductName(x);
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+                    })
+                    .toList();
 
-        List<String> tags = argMultimap.getAllValues(PREFIX_TAG).stream()
-                .map(String::trim)
-                .filter(s -> !s.isEmpty())
-                .toList();
+            tags = argMultimap.getAllValues(PREFIX_TAG).stream()
+                    .map(String::trim)
+                    .filter(s -> !s.isEmpty())
+                    .toList();
 
-        List<LocalDate[]> timeRanges =
-                argMultimap.getAllValues(PREFIX_DEADLINE).stream()
-                        .map(x -> {
-                            try {
-                                return ParserUtil.parseTimeRange(
-                                        x.split("\\s+")[0], x.split("\\s+")[1]);
-                            } catch (ParseException e) {
-                                throw new RuntimeException(e);
-                            }
-                        })
-                        .toList();
+            timeRanges = argMultimap.getAllValues(PREFIX_DEADLINE).stream()
+                    .map(x -> {
+                        try {
+                            return ParserUtil.parseTimeRange(
+                                    x.split("\\s+")[0], x.split("\\s+")[1]);
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+                    })
+                    .toList();
+            
+        } catch (RuntimeException e) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
 
         if (products.isEmpty() && companies.isEmpty() && tags.isEmpty() && timeRanges.isEmpty()) {
             throw new ParseException(

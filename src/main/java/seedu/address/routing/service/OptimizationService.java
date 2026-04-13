@@ -50,6 +50,9 @@ public class OptimizationService {
         String body = buildRequest(vehicleCoords, deliveryCoords,
                 timeWindows, serviceDurations, vehicleProfile);
         String response = client.post("/optimization", body);
+        if (response.isBlank()) {
+            throw new IOException("Connection Error, please try again later");
+        }
         return parseResponse(response, vehicleCoords, deliveryCoords);
     }
 
