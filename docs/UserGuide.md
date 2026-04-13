@@ -293,7 +293,7 @@ A company can have any number of tags, or none at all.
 <details>
 <summary>What companies are considered duplicates?</summary>
 
-<p>A company is considered a duplicate if it has the <strong>same name, phone, email and address</strong> as an existing entry. Company names are case-insensitive for matching purposes.</p>
+<p>A company is considered a duplicate if it has the <strong>same name</strong> as an existing entry. Company names are case-insensitive for matching purposes so `Apple` and `apple` are considered different companies.</p>
 
 </details>
 
