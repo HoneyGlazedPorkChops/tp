@@ -26,12 +26,14 @@ public class GeocodingService {
     public Coordinate geocode(String address) throws IOException {
         String path = "/geocode/search?text=" + OrsHttpClient.encode(address) + "&size=1";
         String response = client.get(path);
-
+        if (response.isBlank()) {
+            throw new IOException("Connection Error, please try again later");
+        }
         JSONObject json = new JSONObject(response);
         JSONArray features = json.getJSONArray("features");
 
         if (features.isEmpty()) {
-            throw new IOException("No geocoding result for: " + address);
+            throw new IOException("No geocoding result found for: " + address);
         }
 
         JSONArray coords = features.getJSONObject(0)
